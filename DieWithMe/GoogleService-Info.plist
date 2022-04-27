@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>66514195058-1rhlke5lhkghsov5cdeiehp65i8f1a82.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.66514195058-1rhlke5lhkghsov5cdeiehp65i8f1a82</string>
+	<key>API_KEY</key>
+	<string>AIzaSyDve0b5udnwlLX-RNIB6q_jF1qoceHD1Rw</string>
+	<key>GCM_SENDER_ID</key>
+	<string>66514195058</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>daniel.DieWithMe</string>
+	<key>PROJECT_ID</key>
+	<string>diewithme-17b78</string>
+	<key>STORAGE_BUCKET</key>
+	<string>diewithme-17b78.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:66514195058:ios:55c07e04d81edd261fa8eb</string>
+</dict>
+</plist>
