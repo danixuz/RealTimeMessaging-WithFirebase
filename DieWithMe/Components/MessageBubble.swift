@@ -42,7 +42,7 @@ struct MessageBubble: View {
 //        .padding(message.received ? .leading : .trailing)
         
         VStack(spacing: 5){
-            Text("Username123")
+            Text(message.displayName)
                 .font(.caption2)
                 .fontWeight(.light)
                 .frame(maxWidth: .infinity, alignment: message.received ? .leading : .trailing)
@@ -61,7 +61,7 @@ struct MessageBubble: View {
                         Text("\(message.percent)%")
                             .font(.caption2)
                     }
-                    .foregroundColor(Color(red: 55/255, green: 55/255, blue: 60/255))
+                    .foregroundColor(Color(red: 100/255, green: 100/255, blue: 107/255))
                 }
                 Text(message.text)
                     .font(.system(size: 15))
@@ -86,7 +86,7 @@ struct MessageBubble: View {
                         Text("\(message.percent)%")
                             .font(.caption2)
                     }
-                    .foregroundColor(Color(red: 55/255, green: 55/255, blue: 60/255))
+                    .foregroundColor(Color(red: 100/255, green: 100/255, blue: 107/255))
                     Spacer()
                 }
             }
@@ -97,7 +97,7 @@ struct MessageBubble: View {
 
 struct MessageBubble_Previews: PreviewProvider {
     static var previews: some View {
-        MessageBubble(message: Message(id: "ierg", text: "היי מה קורה", received: true, timestamp: Date.now, percent: 1))
+        MessageBubble(message: Message(id: "ierg", text: "היי מה קורה", received: true, timestamp: Date.now, percent: 1, displayName: "hello1967"))
         
     }
 }

@@ -13,5 +13,6 @@ struct Message: Identifiable, Codable{
     var received: Bool //if the user is the sender of message or getter
     var timestamp: Date
     var percent: Int
+    var displayName: String
     
 }

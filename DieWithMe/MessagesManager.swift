@@ -11,14 +11,26 @@ import Firebase
 import FirebaseFirestoreSwift
 import UIKit
 
+public enum currentPage{
+    case chat
+    case makeName
+}
+
 
 class MessagesManager: ObservableObject{
+    var percentageTest: Bool = false
+    func updateView() {
+        self.objectWillChange.send()
+    }
+    @Published var currentPage: currentPage = .chat
     @Published private(set) var messages: [Message] = []
     @Published private(set) var lastMessageId: String = ""
     let db = Firestore.firestore()
+    @Published var messageMaxChars = 0
     
     init(){
         getMessages()
+        getSettings()
     }
     
     func getMessages(){
@@ -43,6 +55,22 @@ class MessagesManager: ObservableObject{
             
             if let id = self.messages.last?.id{
                 self.lastMessageId = id
+            }
+        }
+    }
+    
+    //MARK: Get server sided settings
+    func getSettings(){
+        //get message settings
+        db.collection("settings").document("messageSettings").getDocument { document, error in
+            guard error == nil else{
+                print(error!.localizedDescription)
+                return
+            }
+            
+            if let document = document{ //if document exists
+                let data = document.data()
+                self.messageMaxChars = data?["maxCharacters"] as? Int ?? 300 //default value is 300 if nil
             }
         }
     }
@@ -91,15 +119,19 @@ class MessagesManager: ObservableObject{
     
     func sendMessage(text: String){
         if !text.trimmingCharacters(in: .whitespaces).isEmpty {
-            // string contains non-whitespace characters
+            // if string does not contains non-whitespace characters
             do{
                 UIDevice.current.isBatteryMonitoringEnabled = true
                 let batteryFloat = UIDevice.current.batteryLevel
-                let currentPercentage = 100 * batteryFloat
+                var currentPercentage = 100 * batteryFloat
+                if currentPercentage == -100{
+                    currentPercentage = 3
+                }
                 
                 let generatedID = "\(UUID())"
+                let displayName = UserDefaults.standard.string(forKey: "displayName")
     //            let newMessage = Message(id: "\(generatedID)", text: text, received: false, timestamp: Date(), percent: Int(currentBattery))
-                try db.collection("messages").document(generatedID).setData(["id": generatedID, "text": text, "received": false, "timestamp": Date(), "percent": Int(currentPercentage)])
+                try db.collection("messages").document(generatedID).setData(["id": generatedID, "text": text, "received": false, "timestamp": Date(), "percent": Int(currentPercentage), "displayName": displayName ?? "אנונימי"])
             } catch {
                 print(error.localizedDescription)
             }

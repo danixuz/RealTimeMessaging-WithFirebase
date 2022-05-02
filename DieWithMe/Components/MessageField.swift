@@ -39,7 +39,7 @@ struct MessageField: View {
 }
 
 struct CustomTextField: View{
-    let textLimit = 100
+    @EnvironmentObject var viewModel: MessagesManager
     var placeholder: Text
     @Binding var text: String
     var editingChanged: (Bool) -> () = {_ in}
@@ -55,11 +55,11 @@ struct CustomTextField: View{
                 .multilineTextAlignment(.trailing)
                 .flipsForRightToLeftLayoutDirection(true)
                 .onReceive(Just(text)) { _ in
-                    limitText(textLimit)
+                    limitText(viewModel.messageMaxChars)
                 }
         }
     }
-    
+    //LIMIT NUMBER OF LINES
     func limitText(_ max: Int){
         if text.count > max {
             text = String(text.prefix(max))

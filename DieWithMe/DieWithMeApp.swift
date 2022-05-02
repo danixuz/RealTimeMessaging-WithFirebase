@@ -7,34 +7,20 @@
 
 import SwiftUI
 import Firebase
+import AppTrackingTransparency
+import GoogleMobileAds
+
 
 @main
 struct DieWithMeApp: App {
-    
+    @StateObject var viewModel = MessagesManager()
     init(){
         FirebaseApp.configure()
-        let coloredNavAppearance = UINavigationBarAppearance()
-                coloredNavAppearance.configureWithTransparentBackground()
-                coloredNavAppearance.backgroundColor = .clear
-                coloredNavAppearance.backgroundEffect = nil
-                coloredNavAppearance.backgroundImage = UIImage()
-                coloredNavAppearance.shadowImage = UIImage()
-                coloredNavAppearance.shadowColor = .clear
-                coloredNavAppearance.titleTextAttributes = [
-                    .foregroundColor: UIColor.black
-                ]
-                coloredNavAppearance.largeTitleTextAttributes = [
-                    .foregroundColor: UIColor.black
-                ]
-                
-                UINavigationBar.appearance().standardAppearance = coloredNavAppearance
-                UINavigationBar.appearance().scrollEdgeAppearance = coloredNavAppearance
-                UINavigationBar.appearance().compactAppearance = coloredNavAppearance
-
+        GADMobileAds.sharedInstance().start(completionHandler: nil)
     }
     var body: some Scene {
         WindowGroup {
-            ContentView(viewModel: MessagesManager())
+            MotherView(viewModel: viewModel)
         }
     }
 }
